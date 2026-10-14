@@ -1,0 +1,118 @@
+01  Objetivo
+
+El objetivo de esta actividad es aplicar los fundamentos de bases de datos y modelado para gestionar eficazmente el conjunto de datos de reseñas de vinos. Los estudiantes aprenderán a diseñar y estructurar bases de datos relacionales, utilizarán el lenguaje SQL para realizar consultas complejas que extraigan información específica y relevante del conjunto de datos, y explorarán técnicas de análisis multidimensional para obtener perspectivas detalladas sobre las características y tendencias de los vinos basadas en múltiples dimensiones. Además, se enfocarán en la administración eficiente de la base de datos, asegurando la integridad y disponibilidad de los datos para su análisis continuo.
+
+ 
+
+
+02  Situación problemática
+
+Lee con atención el siguiente caso teniendo presente cada uno de los contenidos que hemos desarrollado en el módulo. Una vez leído, tendrás que resolver preguntas cerradas en base al mismo. Haz clic sobre el siguiente enlace para descargar el enunciado:
+
+Click aquíDescargar Click aquí
+
+Documento extraDescargar Documento extra
+
+ 
+
+ 
+
+03  Consigna abierta
+
+    1. Diseño de la base de datos:
+        ◦ Crear un modelo de base de datos relacional que refleje adecuadamente la estructura del conjunto de datos de reseñas de vinos, considerando entidades, atributos y relaciones relevantes.
+        ◦ Definir esquemas de tablas que permitan almacenar y relacionar la información de manera eficiente.
+    2. Implementación y gestión de la base de datos:
+        ◦ Utilizar un sistema de gestión de bases de datos (SGBD) como MySQL, PostgreSQL o SQLite para implementar el diseño de la base de datos.
+        ◦ Asegurar la integridad de los datos mediante la definición de restricciones y la gestión de transacciones.
+    3. Consultas SQL avanzadas:
+        ◦ Desarrollar consultas SQL complejas que respondan a preguntas específicas sobre el conjunto de datos, como la cantidad de vinos por país, las variedades más comunes en una región específica, o el precio promedio por punto de calificación.
+    4. Análisis multidimensional:
+        ◦ Realizar análisis multidimensional para explorar las características de los vinos a través de múltiples dimensiones como país, variedad, precio y puntuación.
+
+Recursos:
+    • Conjunto de datos de reseñas de vinos (winemag-data-130k-v2.csv).
+    • Sistema de gestión de bases de datos (MySQL, PostgreSQL, SQLite).
+
+ 
+
+04  Formato entregable
+
+En este trabajo práctico deberá hacer entrega de tres archivos:
+
+Script SQL: Un archivo que contenga todos los comandos SQL utilizados para crear las tablas, definir las restricciones de integridad, insertar datos y realizar consultas avanzadas en la base de datos de MySQL. Este script debe estar bien comentado para explicar cada paso y facilitar la comprensión del proceso. Incluir comentarios pertinentes que permitan la comprensión del mismo. 
+
+Informe técnico: Un documento que describa detalladamente el proceso llevado a cabo, incluyendo:
+    • Una explicación del modelo de base de datos relacional diseñado, con el esquema de las tablas, relaciones entre ellas y las decisiones de diseño tomadas.
+    • Ejemplos significativos de consultas SQL utilizadas, junto con los resultados obtenidos y su interpretación.
+    • Discusión sobre los desafíos enfrentados y cómo fueron abordados durante el trabajo con la base de datos MySQL o similar.
+    • Conclusiones sobre los resultados obtenidos y posibles áreas para investigaciones futuras en el contexto del análisis de datos de vinos.
+
+Diagrama de la base de datos: Un diagrama visual del modelo de base de datos relacional diseñado en formato PDF. Este diagrama proporcionará una representación clara de las tablas, los atributos y las relaciones entre ellas, facilitando la comprensión de la estructura de la base de datos implementada. En el mismo deben estar claramente indicados:
+    • Entidades
+    • Atributos de las entidades
+    • Relaciones
+    • Claves primarias y foráneas
+    • Cardinalidad
+
+Informe en PDF
+Carátula:
+    • Título del informe: Debe ser claro y conciso.
+    • Nombre del autor(es): Incluir nombre completo.
+    • Fecha: Fecha de entrega o elaboración del informe.
+
+Índice:
+    • Enumeración de secciones y subsecciones del informe.
+    • Incluir número de página correspondiente.
+
+Cuerpo del informe:
+    • Tipo de letra: Preferiblemente Times New Roman o Arial.
+    • Tamaño de letra: 12 puntos para texto principal, 14 puntos para títulos principales.
+    • Interlineado: 1.5 líneas para el cuerpo del texto.
+    • Márgenes: Ajustar a 2.5 cm en todos los lados.
+    • Sangrías: Utilizar sangría de 1.27 cm. para el inicio de cada párrafo.
+    • Encabezado y pie de página:
+            ▪ Encabezado: Incluir el título del informe o el nombre del proyecto.
+            ▪ Pie de página: Número de página y otra información relevante, como el nombre del autor o la fecha.
+
+Otros aspectos significativos:
+        • Numeración de páginas: Iniciar numeración en la página del índice.
+    • Formato de títulos y subtítulos: Utilizar negrita para títulos y cursiva para subtítulos.
+    • Referencias: Si es necesario, seguir el formato APA o el indicado por la institución.
+    • Anexos: Incluir al final del informe si es necesario.
+
+Una rúbrica (2)
+Criterios	Calificaciones	Puntos
+Criterio 1: Comprensión de fundamentos de bases de datos. 35 %
+
+Demuestra un entendimiento profundo de los principios fundamentales de las bases de datos, incluyendo la teoría de bases de datos relacionales, diseño de esquemas, y conceptos clave como entidades, atributos, claves primarias y foráneas.
+30 pts
+
+Muestra un entendimiento adecuado de los fundamentos de bases de datos, aunque con algunos errores menores en conceptos clave o aplicaciones prácticas.
+12.86 pts
+
+Muestra confusión significativa o falta de comprensión en los fundamentos básicos de las bases de datos.
+4.29 pts
+/30 pts
+Criterio 2: Habilidad en el uso del lenguaje SQL. 35 %
+
+Utiliza SQL de manera experta para realizar consultas complejas, incluyendo consultas multi-tabla, agregaciones, subconsultas, joins y operaciones de manipulación de datos.
+35 pts
+
+Demuestra habilidades básicas en SQL, capaz de escribir consultas simples y algunas consultas más complejas con guía o asistencia.
+15 pts
+
+Muestra dificultades significativas para escribir consultas SQL básicas o comete errores frecuentes en la sintaxis y lógica de las consultas.
+5 pts
+/35 pts
+Criterio 3: Calidad del trabajo y documentación. 30 %
+
+Presenta un trabajo organizado, claro y bien documentado, con explicaciones detalladas de decisiones de diseño, consultas SQL y análisis multidimensional.
+35 pts
+
+La presentación del trabajo es adecuada, pero podría mejorar en la claridad de la documentación y explicaciones.
+15 pts
+
+La presentación del trabajo es desorganizada o la documentación es insuficiente, dificultando la comprensión de las acciones realizadas y los resultados obtenidos.
+5 pts
+/35 pts
