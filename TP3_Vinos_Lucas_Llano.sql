@@ -1,8 +1,6 @@
 -- TP3 - Base de datos de reseñas de vinos (WineEnthusiast)
 -- Lucas Llano - 14/10/2026
 -- MySQL 8.4
--- Se corre desde la carpeta del TP con: mysql --local-infile=1 -u root -p < TP3_Vinos_Lucas_Llano.sql
-
 
 -- =============================================
 -- 0. BASE DE DATOS
@@ -401,8 +399,7 @@ LEFT JOIN catador c ON c.id_catador = r.id_catador;
 -- =============================================
 -- 5. PRUEBAS DE INTEGRIDAD Y TRANSACCIONES
 -- =============================================
--- todos estos casos tienen que fallar. sp_probar ejecuta la sentencia y muestra el error
--- en vez de cortar el script
+-- todos estos casos tienen que fallar. sp_probar ejecuta la sentencia y muestra el error en vez de cortar el script
 
 DELIMITER //
 
