@@ -1,4 +1,5 @@
 # Arma el informe en PDF y Word.
+import os
 import re
 from decimal import Decimal
 from pathlib import Path
@@ -265,7 +266,9 @@ E = {
     "celda_h": ParagraphStyle("celda_h", fontName="TNR-B", fontSize=9, leading=10.8),
     "nota": ParagraphStyle("nota", fontName="TNR-I", fontSize=10, leading=13,
                            alignment=TA_CENTER, spaceBefore=3, spaceAfter=12),
-    "indice_t": ParagraphStyle("indice_t", fontName="TNR-B", fontSize=14, leading=21, spaceAfter=14),
+    "referencia": ParagraphStyle("referencia", fontName="TNR", fontSize=12, leading=18,
+                                 leftIndent=1.27 * cm, firstLineIndent=-1.27 * cm, spaceAfter=6),
+    "indice_t":ParagraphStyle("indice_t", fontName="TNR-B", fontSize=14, leading=21, spaceAfter=14),
 }
 TOC_ESTILOS = [
     ParagraphStyle("toc1", fontName="TNR-B", fontSize=12, leading=18, leftIndent=0, firstLineIndent=0),
@@ -388,14 +391,20 @@ def generar_pdf(bloques):
     pendiente = None  # tabla que espera su nota, para que no queden separadas
     for tipo, dato in bloques:
         if tipo == "h1":
-            historia.append(PageBreak())
+            if historia[-1] is toc:  # el primer capítulo empieza en hoja nueva, el resto sigue de corrido
+                historia.append(PageBreak())
             p = Paragraph(esc(dato), E["h1"]); p.nivel_toc = 0
             historia.append(p)
         elif tipo == "h2":
             p = Paragraph(esc(dato), E["h2"]); p.nivel_toc = 1
             historia.append(p)
         elif tipo == "p":
-            historia.append(Paragraph(esc(dato), E["cuerpo"]))
+            # las referencias van en APA: a la izquierda y con sangría francesa
+            previo = historia[-1]
+            es_ref = getattr(previo, "es_ref", False) or getattr(previo, "getPlainText", str)() == "Referencias"
+            estilo = E["referencia"] if es_ref else E["cuerpo"]
+            p = Paragraph(esc(dato), estilo); p.es_ref = estilo is E["referencia"]
+            historia.append(p)
         elif tipo == "codigo":
             historia.append(Codigo(dato, E["codigo"], maxLineLength=112, newLineChars="    "))
         elif tipo == "tabla":
@@ -590,7 +599,9 @@ def generar_docx(bloques):
 
 def main():
     consultas = leer_consultas()
-    conexion = mysql.connector.connect(user="root", host="127.0.0.1", database="vinos_tp3",
+    conexion = mysql.connector.connect(user="root", password=os.environ.get("MYSQL_PWD", ""),
+                                       host="127.0.0.1", port=int(os.environ.get("MYSQL_PORT", 3306)),
+                                       database="vinos_tp3",
                                        charset="utf8mb4", collation="utf8mb4_0900_as_ci")
     cur = conexion.cursor()
     bloques, resultados = resolver(parsear(CONTENIDO.read_text(encoding="utf-8")), consultas, cur)

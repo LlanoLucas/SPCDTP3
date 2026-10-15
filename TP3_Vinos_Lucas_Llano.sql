@@ -1,6 +1,7 @@
 -- TP3 - Base de datos de reseñas de vinos (WineEnthusiast)
 -- Lucas Llano - 14/10/2026
 -- MySQL 8.4
+-- Se corre desde la carpeta del TP con: mysql --local-infile=1 -u root -p < TP3_Vinos_Lucas_Llano.sql
 
 
 -- =============================================
@@ -160,6 +161,7 @@ CREATE TABLE stg_resena (
     INDEX ix_stg_clave (clave_vino)
 ) ENGINE = InnoDB;
 
+-- el CSV es el del documento extra, ya limpio (filas partidas y acentos arreglados, ver informe)
 -- ESCAPED BY '' porque algunas descripciones tienen barras invertidas
 LOAD DATA LOCAL INFILE 'datos/winemag_limpio.csv'
 INTO TABLE stg_resena
@@ -207,6 +209,7 @@ SELECT SUM(es_duplicado) AS duplicados_detectados,
        SUM(NOT es_duplicado) AS resenas_unicas
 FROM stg_resena;
 
+-- primero las tablas sin dependencias y la geografía de arriba hacia abajo (país > provincia > región)
 INSERT INTO pais (nombre)
 SELECT DISTINCT pais FROM stg_resena WHERE pais IS NOT NULL;
 
@@ -238,6 +241,7 @@ FROM stg_resena
 WHERE catador IS NOT NULL
 GROUP BY catador;
 
+-- le pongo a cada fila del staging los id de las tablas que ya cargué
 -- LEFT JOIN para no perder las filas con datos faltantes
 UPDATE stg_resena s
 LEFT JOIN pais p ON p.nombre = s.pais
@@ -274,6 +278,7 @@ FROM stg_resena
 WHERE NOT es_duplicado
 GROUP BY clave_vino, id_bodega, id_variedad, id_provincia, id_region, id_zona;
 
+-- las reseñas sin duplicados, cada una con su vino
 INSERT INTO resena (id_resena, id_vino, id_catador, puntos, precio, descripcion)
 SELECT s.id_original, v.id_vino, s.id_catador, s.puntos, s.precio, s.descripcion
 FROM stg_resena s
@@ -285,6 +290,7 @@ COMMIT;
 -- sin esto la C06 tarda casi 3 minutos (mal plan por falta de estadísticas)
 ANALYZE TABLE pais, provincia, region, zona, bodega, variedad, catador, vino, resena;
 
+-- control: filas por tabla
 SELECT 'pais' AS tabla, COUNT(*) AS filas FROM pais
 UNION ALL SELECT 'provincia', COUNT(*) FROM provincia
 UNION ALL SELECT 'region', COUNT(*) FROM region
@@ -395,7 +401,8 @@ LEFT JOIN catador c ON c.id_catador = r.id_catador;
 -- =============================================
 -- 5. PRUEBAS DE INTEGRIDAD Y TRANSACCIONES
 -- =============================================
--- todos estos casos tienen que fallar
+-- todos estos casos tienen que fallar. sp_probar ejecuta la sentencia y muestra el error
+-- en vez de cortar el script
 
 DELIMITER //
 
